@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  donation-service:
+    build:
+      context: ./donaton-backend/donation-service
+    ports:
+      - "8081:8081"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+
+  logistics-service:
+    build:
+      context: ./donaton-backend/logistics-service
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+
+  bff-service:
+    build:
+      context: ./donaton-backend/bff-service
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - donation-service
+      - logistics-service
+
+  frontend:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ./donaton-frontend:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm start"
