@@ -1,5 +1,5 @@
 package com.donaton.donation.controller;
-
+import com.donaton.donation.strategy.*;
 import com.donaton.donation.model.Donation;
 import com.donaton.donation.repository.DonationRepository;
 import com.donaton.donation.repository.factory.DonationFactory;
@@ -28,4 +28,18 @@ public class DonationController {
         newDonation.setDescription(description);
         return repository.save(newDonation);
     }
+}
+
+@GetMapping("/process/{type}")
+public String processDonation(@PathVariable String type) {
+
+    DonationStrategy strategy;
+
+    if(type.equals("individual")) {
+        strategy = new IndividualDonationStrategy();
+    } else {
+        strategy = new CorporateDonationStrategy();
+    }
+
+    return strategy.processDonation();
 }
