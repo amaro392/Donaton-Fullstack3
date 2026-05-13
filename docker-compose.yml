@@ -12,15 +12,12 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  # --- INTERFAZ GRÁFICA (Opcional pero recomendada) ---
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+  # --- EUREKA SERVER ---
+  eureka-server:
+    build:
+      context: ./donaton-backend/eureka-server
     ports:
-      - "8081:80"
-    environment:
-      PMA_HOST: mysql-db
-    depends_on:
-      - mysql-db
+      - "8761:8761"
 
   # --- MICROSERVICIOS ---
   donation-service:
@@ -30,11 +27,13 @@ services:
       - "8082:8082"
     depends_on:
       - mysql-db
+      - eureka-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
   logistics-service:
     build:
@@ -43,11 +42,13 @@ services:
       - "8083:8083"
     depends_on:
       - mysql-db
+      - eureka-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
   # --- BFF ---
   bff-service:
@@ -56,8 +57,11 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      - eureka-server
       - donation-service
       - logistics-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
   # --- FRONTEND ---
   frontend:
