@@ -1,0 +1,33 @@
+========================================
+REPOSITORIOS DEL PROYECTO DONATON
+========================================
+
+REPOSITORIO PRINCIPAL
+URL: https://github.com/amaro392/Donaton-Fullstack3
+Descripción: Repositorio principal con todos los componentes del proyecto (frontend, BFF y microservicios).
+
+----------------------------------------
+
+FRONTEND
+URL: https://github.com/amaro392/Donaton-Fullstack3/tree/main/donaton-frontend
+Descripción: Componente frontend React (NPM) con autenticación, vistas de admin y usuario.
+
+BFF SERVICE
+URL: https://github.com/amaro392/Donaton-Fullstack3/tree/main/donaton-backend/bff-service
+Descripción: Backend For Frontend que centraliza las peticiones del frontend hacia los microservicios.
+
+DONATION SERVICE (Microservicio 1)
+URL: https://github.com/amaro392/Donaton-Fullstack3/tree/main/donaton-backend/donation-service
+Descripción: Microservicio de gestión de donaciones. Implementa patrones Factory y Strategy.
+
+LOGISTICS SERVICE (Microservicio 2)
+URL: https://github.com/amaro392/Donaton-Fullstack3/tree/main/donaton-backend/logistics-service
+Descripción: Microservicio de gestión de inventario logístico de donaciones físicas.
+
+EUREKA SERVER
+URL: https://github.com/amaro392/Donaton-Fullstack3/tree/main/donaton-backend/eureka-server
+Descripción: Servidor de descubrimiento de servicios (Service Registry) para todos los microservicios.
+
+ARQUETIPO MAVEN
+URL: https://github.com/amaro392/Donaton-Fullstack3/tree/main/maven-archetypes/microservice-archetype
+Descripción: Arquetipo Maven base para generar nuevos microservicios del ecosistema Donaton.
