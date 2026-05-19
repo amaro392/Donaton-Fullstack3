@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dono — Panel de Administrador</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../pAdmin.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="#" class="brand-logo">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <span class="brand-name">Donaton</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Causas</a></li>
+    <li><a href="#">Usuarios</a></li>
+    <li><a href="#">Donaciones</a></li>
+    <li><a href="#" class="active">Mi perfil</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="admin-badge-nav">Admin</div>
+    <img src="../assets/icon-7797704_1280.png" alt="Avatar" class="nav-avatar">
+    <a href="../public/index.html" class="nav-logout">Cerrar sesión</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- Hero del admin -->
+  <div class="profile-hero admin-hero">
+    <div class="avatar-circle admin-avatar">
+      <img src="../assets/icon-7797704_1280.png" alt="Avatar" class="avatar-circle">
+    </div>
+    <div class="hero-info">
+      <p class="hero-name">Administrador</p>
+      <p class="hero-email">admin@donaton.cl</p>
+      <div class="hero-badge admin-role-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.77l-6.18 3.25L7 13.14 2 8.27l6.91-1.01z"/></svg>
+        Administrador del sistema
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">1.284</span>
+        <span class="hero-stat-label">Usuarios activos</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">38</span>
+        <span class="hero-stat-label">Causas activas</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">$48,2M</span>
+        <span class="hero-stat-label">Total recaudado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resumen del sistema -->
+  <p class="section-label">Estado del sistema</p>
+  <div class="grid-4" style="margin-bottom: 2rem;">
+    <div class="stat-card">
+      <span class="stat-card-label">Nuevos usuarios este mes</span>
+      <span class="stat-card-num">127</span>
+      <span class="stat-card-sub trend-up">+23% vs. mes anterior</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card-label">Donaciones este mes</span>
+      <span class="stat-card-num">$4.320.000</span>
+      <span class="stat-card-sub trend-up">+18% vs. mes anterior</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card-label">Causas pendientes</span>
+      <span class="stat-card-num stat-alert">5</span>
+      <span class="stat-card-sub">Requieren revisión</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card-label">Reportes abiertos</span>
+      <span class="stat-card-num stat-alert">3</span>
+      <span class="stat-card-sub">Por resolver</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- Información de la cuenta admin -->
+    <div>
+      <p class="section-label">Información personal</p>
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Datos de cuenta
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" value="Carlos">
+          </div>
+          <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" value="Mondaca">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" value="carlos.mondaca@donaton.cl">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="text" value="+56 9 9100 2234">
+        </div>
+        <div class="form-group">
+          <label>Rol</label>
+          <select>
+            <option selected>Administrador</option>
+            <option>Moderador</option>
+            <option>Analista</option>
+          </select>
+        </div>
+        <button class="btn-save">Guardar cambios</button>
+      </div>
+
+      <!-- Seguridad -->
+      <p class="section-label" style="margin-top: 1.5rem;">Seguridad</p>
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Acceso y seguridad
+        </div>
+        <div class="security-row">
+          <div class="security-info">
+            <span class="security-label">Contraseña</span>
+            <span class="security-sub">Actualizada hace 30 días</span>
+          </div>
+          <button class="btn-secondary">Cambiar</button>
+        </div>
+        <div class="security-row">
+          <div class="security-info">
+            <span class="security-label">Autenticación en dos pasos</span>
+            <span class="security-sub">Activada · via app autenticadora</span>
+          </div>
+          <span class="status-chip chip-active">Activa</span>
+        </div>
+        <div class="security-row" style="border-bottom: none; padding-bottom: 0;">
+          <div class="security-info">
+            <span class="security-label">Último acceso</span>
+            <span class="security-sub">Hoy, 09:41 · Santiago, CL</span>
+          </div>
+          <button class="btn-secondary btn-danger">Cerrar sesiones</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel derecho -->
+    <div>
+
+      <!-- Causas pendientes de revisión -->
+      <p class="section-label">Causas pendientes</p>
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Requieren aprobación
+        </div>
+
+        <div class="pending-item">
+          <div class="pending-left">
+            <div class="pending-dot dot-new"></div>
+            <div>
+              <p class="pending-title">Reconstrucción en Atacama</p>
+              <p class="pending-org">ONG SurActivo · enviada hace 2h</p>
+            </div>
+          </div>
+          <div class="pending-actions">
+            <button class="btn-approve">Aprobar</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+        </div>
+
+        <div class="pending-item">
+          <div class="pending-left">
+            <div class="pending-dot dot-new"></div>
+            <div>
+              <p class="pending-title">Becas universitarias 2026</p>
+              <p class="pending-org">Fundación Crecer · enviada hace 5h</p>
+            </div>
+          </div>
+          <div class="pending-actions">
+            <button class="btn-approve">Aprobar</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+        </div>
+
+        <div class="pending-item">
+          <div class="pending-left">
+            <div class="pending-dot dot-review"></div>
+            <div>
+              <p class="pending-title">Refugio para mujeres Valparaíso</p>
+              <p class="pending-org">Red Mujer · enviada hace 1 día</p>
+            </div>
+          </div>
+          <div class="pending-actions">
+            <button class="btn-approve">Aprobar</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+        </div>
+
+        <div class="pending-item">
+          <div class="pending-left">
+            <div class="pending-dot dot-review"></div>
+            <div>
+              <p class="pending-title">Alimentación escolar rural</p>
+              <p class="pending-org">ONG Semilla · enviada hace 2 días</p>
+            </div>
+          </div>
+          <div class="pending-actions">
+            <button class="btn-approve">Aprobar</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+        </div>
+
+        <div class="pending-item" style="border-bottom: none; padding-bottom: 0;">
+          <div class="pending-left">
+            <div class="pending-dot dot-review"></div>
+            <div>
+              <p class="pending-title">Salud mental para jóvenes</p>
+              <p class="pending-org">Fundación Mente Sana · enviada hace 3 días</p>
+            </div>
+          </div>
+          <div class="pending-actions">
+            <button class="btn-approve">Aprobar</button>
+            <button class="btn-reject">Rechazar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Últimos usuarios registrados -->
+      <p class="section-label" style="margin-top: 1.5rem;">Últimos usuarios registrados</p>
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Nuevas cuentas
+        </div>
+
+        <div class="user-item">
+          <div class="user-avatar-sm">AM</div>
+          <div class="user-info">
+            <p class="user-name">Ana Mora</p>
+            <p class="user-meta">ana.mora@gmail.com · hace 1h</p>
+          </div>
+          <span class="status-chip chip-active">Activo</span>
+        </div>
+
+        <div class="user-item">
+          <div class="user-avatar-sm">JP</div>
+          <div class="user-info">
+            <p class="user-name">Jorge Pineda</p>
+            <p class="user-meta">jpineda@hotmail.com · hace 3h</p>
+          </div>
+          <span class="status-chip chip-active">Activo</span>
+        </div>
+
+        <div class="user-item">
+          <div class="user-avatar-sm">LR</div>
+          <div class="user-info">
+            <p class="user-name">Lucía Rojas</p>
+            <p class="user-meta">luciirojas@correo.cl · hace 6h</p>
+          </div>
+          <span class="status-chip chip-pending">Pendiente</span>
+        </div>
+
+        <div class="user-item" style="border-bottom: none; padding-bottom: 0;">
+          <div class="user-avatar-sm">MF</div>
+          <div class="user-info">
+            <p class="user-name">Matías Fuentes</p>
+            <p class="user-meta">mfuentes@gmail.com · ayer</p>
+          </div>
+          <span class="status-chip chip-active">Activo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reportes abiertos -->
+  <p class="section-label" style="margin-top: 1.5rem;">Reportes abiertos</p>
+  <div class="grid-3">
+    <div class="report-card report-high">
+      <div class="report-header">
+        <span class="report-severity sev-high">Alta prioridad</span>
+        <span class="report-date">Hace 2h</span>
+      </div>
+      <p class="report-title">Donación duplicada no reembolsada</p>
+      <p class="report-desc">Usuario reporta cargo doble en causa "Techo para Chile" por $15.000. Requiere revisión de pagos.</p>
+      <button class="btn-resolve">Ver reporte</button>
+    </div>
+    <div class="report-card report-mid">
+      <div class="report-header">
+        <span class="report-severity sev-mid">Media prioridad</span>
+        <span class="report-date">Hace 1 día</span>
+      </div>
+      <p class="report-title">Causa con información incorrecta</p>
+      <p class="report-desc">Tres usuarios reportan datos inconsistentes en "Educación para Todos". Posible error en formulario de organización.</p>
+      <button class="btn-resolve">Ver reporte</button>
+    </div>
+    <div class="report-card report-low">
+      <div class="report-header">
+        <span class="report-severity sev-low">Baja prioridad</span>
+        <span class="report-date">Hace 3 días</span>
+      </div>
+      <p class="report-title">Perfil de organización incompleto</p>
+      <p class="report-desc">ONG Semilla no ha completado su verificación de identidad. Pendiente desde el registro.</p>
+      <button class="btn-resolve">Ver reporte</button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
