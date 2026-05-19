@@ -1,4 +1,4 @@
-package com.donaton.donation;
+package com.donaton.logistics;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,60 +11,60 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Pruebas exhaustivas para el controlador de donaciones.
- * Verifica que todos los endpoints funcionan correctamente.
+ * Pruebas exhaustivas para el controlador de logística.
+ * Verifica que los endpoints de gestión de inventario funcionan correctamente.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DonationControllerTest {
+public class LogisticsControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetAllDonations_ShouldReturnOk() throws Exception {
-        mockMvc.perform(get("/api/donations")
+    public void testGetInventory_ShouldReturnOk() throws Exception {
+        mockMvc.perform(get("/api/inventory")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testGetDonationById_ShouldReturnOk() throws Exception {
-        mockMvc.perform(get("/api/donations/1")
+    public void testGetInventoryItem_ShouldReturnOk() throws Exception {
+        mockMvc.perform(get("/api/inventory/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testCreateDonation_ShouldReturnCreated() throws Exception {
-        String donationJson = "{\"type\":\"INDIVIDUAL\",\"description\":\"Test donation\",\"citizenRut\":\"12.345.678-9\"}";
+    public void testCreateInventoryItem_ShouldReturnCreated() throws Exception {
+        String inventoryJson = "{\"name\":\"Test Item\",\"quantity\":100}";
         
-        mockMvc.perform(post("/api/donations")
+        mockMvc.perform(post("/api/inventory")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(donationJson))
+                .content(inventoryJson))
                 .andExpect(status().isCreated());
     }
 
     @Test
-    public void testUpdateDonation_ShouldReturnOk() throws Exception {
-        String donationJson = "{\"type\":\"CORPORATE\",\"description\":\"Updated donation\",\"companyName\":\"Test Corp\"}";
+    public void testUpdateInventoryItem_ShouldReturnOk() throws Exception {
+        String inventoryJson = "{\"name\":\"Updated Item\",\"quantity\":50}";
         
-        mockMvc.perform(put("/api/donations/1")
+        mockMvc.perform(put("/api/inventory/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(donationJson))
+                .content(inventoryJson))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testDeleteDonation_ShouldReturnNoContent() throws Exception {
-        mockMvc.perform(delete("/api/donations/1")
+    public void testDeleteInventoryItem_ShouldReturnNoContent() throws Exception {
+        mockMvc.perform(delete("/api/inventory/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    public void testGetDonations_ContentTypeIsJson() throws Exception {
-        mockMvc.perform(get("/api/donations")
+    public void testInventoryContentTypeIsJson() throws Exception {
+        mockMvc.perform(get("/api/inventory")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
