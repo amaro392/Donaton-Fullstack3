@@ -28,18 +28,16 @@ public class DonationController {
         newDonation.setDescription(description);
         return repository.save(newDonation);
     }
-}
 
-@GetMapping("/process/{type}")
-public String processDonation(@PathVariable String type) {
-
-    DonationStrategy strategy;
-
-    if(type.equals("individual")) {
-        strategy = new IndividualDonationStrategy();
-    } else {
-        strategy = new CorporateDonationStrategy();
+    // Procesar una donación usando el Patrón Strategy
+    @GetMapping("/process/{type}")
+    public String processDonation(@PathVariable String type) {
+        DonationStrategy strategy;
+        if (type.equals("individual")) {
+            strategy = new IndividualDonationStrategy();
+        } else {
+            strategy = new CorporateDonationStrategy();
+        }
+        return strategy.processDonation();
     }
-
-    return strategy.processDonation();
 }
