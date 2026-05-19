@@ -2,52 +2,135 @@ version: '3.8'
 
 services:
   # --- BASE DE DATOS MYSQL ---
-  mysql-db:
+  mysql-donation:
     image: mysql:8.0
+    container_name: mysql_donation
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: donaton_db
+      MYSQL_DATABASE: donaton_donation_db
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql_donation_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  mysql-logistics:
+    image: mysql:8.0
+    container_name: mysql_logistics
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: donaton_logistics_db
+    volumes:
+      - mysql_logistics_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   # --- EUREKA SERVER ---
   eureka-server:
     build:
       context: ./donaton-backend/eureka-server
+    container_name: eureka_server
     ports:
       - "8761:8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/eureka/apps"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  # --- MICROSERVICIOS ---
+  # --- BFF SERVICE ---
+  bff-service:
+    build:
+      context: ./donaton-backend/bff-service
+    container_name: bff_service
+    ports:
+      - "8080:8080"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- DONATION MICROSERVICE ---
   donation-service:
     build:
       context: ./donaton-backend/donation-service
+    container_name: donation_service
     ports:
       - "8082:8082"
     depends_on:
-      - mysql-db
-      - eureka-server
+      mysql-donation:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-donation:3306/donaton_donation_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/api/donations"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
 
+  # --- LOGISTICS MICROSERVICE ---
   logistics-service:
     build:
       context: ./donaton-backend/logistics-service
+    container_name: logistics_service
     ports:
       - "8083:8083"
     depends_on:
-      - mysql-db
-      - eureka-server
+      mysql-logistics:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-logistics:3306/donaton_logistics_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/api/logistics/inventory"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # --- FRONTEND ---
+  frontend:
+    build:
+      context: ./donaton-frontend
+    container_name: donaton_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - bff-service
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+
+volumes:
+  mysql_donation_data:
+  mysql_logistics_data:
+
+networks:
+  default:
+    name: donaton-network
+    driver: bridge
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
   # --- BFF ---

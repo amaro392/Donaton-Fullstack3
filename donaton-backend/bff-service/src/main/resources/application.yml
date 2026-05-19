@@ -10,13 +10,27 @@ spring:
         - id: donation-service-route
           uri: lb://donation-service
           predicates:
-            - Path=/donations/**
+            - Path=/api/donations/**
+          filters:
+            - RewritePath=/api/donations/(?<segment>.*), /api/donations/$\{segment}
         - id: logistics-service-route
           uri: lb://logistics-service
           predicates:
-            - Path=/logistics/**
+            - Path=/api/logistics/**
+          filters:
+            - RewritePath=/api/logistics/(?<segment>.*), /api/logistics/$\{segment}
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+logging:
+  level:
+    root: INFO
+    com.donaton: DEBUG
+    org.springframework.cloud.gateway: DEBUG
