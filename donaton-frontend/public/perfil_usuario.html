@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dono — Mi Perfil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pUsuario.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="#" class="brand-logo">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <span class="brand-name">Donaton</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Explorar causas</a></li>
+    <li><a href="#">Mis donaciones</a></li>
+    <li><a href="#" class="active">Mi perfil</a></li>
+  </ul>
+<div class="nav-right">
+    <img src="/assets/icon-7797704_1280.png" alt="Avatar" class="nav-avatar">
+    <a href="index.html" class="nav-logout">Cerrar sesión</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+<div class="profile-hero">
+    <div class="avatar-circle"><img src="/assets/icon-7797704_1280.png" alt="Avatar" class="avatar-circle"></div>
+    <div class="hero-info">
+      <p class="hero-name">Nombre De Usuario</p>
+      <p class="hero-email">nombre_usuario@correo.cl</p>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Donante activo
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">$182.400</span>
+        <span class="hero-stat-label">Donado total</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">12</span>
+        <span class="hero-stat-label">Donaciones</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">4</span>
+        <span class="hero-stat-label">Causas apoyadas</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label">Resumen del mes</p>
+  <div class="grid-3" style="margin-bottom: 2rem;">
+    <div class="stat-card">
+      <span class="stat-card-label">Donado este mes</span>
+      <span class="stat-card-num">$24.000</span>
+      <span class="stat-card-sub">+15% vs. mes anterior</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card-label">Donaciones recurrentes</span>
+      <span class="stat-card-num">3 activas</span>
+      <span class="stat-card-sub">Próximo cobro: 1 jun</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card-label">Miembro desde</span>
+      <span class="stat-card-num">Mar 2023</span>
+      <span class="stat-card-sub">2 años apoyando causas</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <p class="section-label">Información personal</p>
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Datos de cuenta
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" value="María">
+          </div>
+          <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" value="Valenzuela">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" value="maria.valenzuela@correo.cl">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="text" value="+56 9 8821 4430">
+        </div>
+        <div class="form-group">
+          <label>País</label>
+          <select>
+            <option selected>Chile</option>
+            <option>Argentina</option>
+            <option>Colombia</option>
+            <option>México</option>
+          </select>
+        </div>
+        <button class="btn-save">Guardar cambios</button>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-label">Últimas donaciones</p>
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Historial reciente
+        </div>
+        <div class="donation-item">
+          <div class="donation-left">
+            <div class="donation-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+            <div><p class="donation-cause">Techo para Chile</p><p class="donation-date">15 may 2025</p></div>
+          </div>
+          <div class="donation-right"><span class="donation-amount">$8.000</span><span class="donation-tag tag-recurrente">Recurrente</span></div>
+        </div>
+        <div class="donation-item">
+          <div class="donation-left">
+            <div class="donation-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div><p class="donation-cause">Fundación Las Rosas</p><p class="donation-date">10 may 2025</p></div>
+          </div>
+          <div class="donation-right"><span class="donation-amount">$5.000</span><span class="donation-tag tag-recurrente">Recurrente</span></div>
+        </div>
+        <div class="donation-item">
+          <div class="donation-left">
+            <div class="donation-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <div><p class="donation-cause">ONG Aprendo</p><p class="donation-date">28 abr 2025</p></div>
+          </div>
+          <div class="donation-right"><span class="donation-amount">$15.000</span><span class="donation-tag tag-unica">Única vez</span></div>
+        </div>
+        <div class="donation-item">
+          <div class="donation-left">
+            <div class="donation-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <div><p class="donation-cause">Banco de Alimentos</p><p class="donation-date">3 abr 2025</p></div>
+          </div>
+          <div class="donation-right"><span class="donation-amount">$20.000</span><span class="donation-tag tag-unica">Única vez</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label" style="margin-top: 1.5rem;">Causas que sigo</p>
+  <div class="grid-3">
+    <div class="cause-card">
+      <div class="cause-img"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+      <div class="cause-body">
+        <p class="cause-name">Techo para Chile</p>
+        <p class="cause-org">Fundación Techo · Vivienda</p>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:72%"></div></div>
+        <p class="cause-pct">72% recaudado · $1.440.000 de $2.000.000</p>
+      </div>
+    </div>
+    <div class="cause-card">
+      <div class="cause-img"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="cause-body">
+        <p class="cause-name">Adultos Mayores Felices</p>
+        <p class="cause-org">Fundación Las Rosas · Salud</p>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:55%"></div></div>
+        <p class="cause-pct">55% recaudado · $550.000 de $1.000.000</p>
+      </div>
+    </div>
+    <div class="cause-card">
+      <div class="cause-img"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <div class="cause-body">
+        <p class="cause-name">Educación para Todos</p>
+        <p class="cause-org">ONG Aprendo · Educación</p>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:38%"></div></div>
+        <p class="cause-pct">38% recaudado · $380.000 de $1.000.000</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

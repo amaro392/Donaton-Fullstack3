@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-  # --- BASE DE DATOS MYSQL ---
   mysql-db:
     image: mysql:8.0
     ports:
@@ -11,25 +8,30 @@ services:
       MYSQL_DATABASE: donaton_db
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
-  # --- EUREKA SERVER ---
   eureka-server:
     build:
       context: ./donaton-backend/eureka-server
     ports:
       - "8761:8761"
 
-  # --- MICROSERVICIOS ---
   donation-service:
     build:
       context: ./donaton-backend/donation-service
     ports:
       - "8082:8082"
     depends_on:
-      - mysql-db
-      - eureka-server
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -41,16 +43,17 @@ services:
     ports:
       - "8083:8083"
     depends_on:
-      - mysql-db
-      - eureka-server
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/donaton_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
-  # --- BFF ---
   bff-service:
     build:
       context: ./donaton-backend/bff-service
@@ -63,15 +66,11 @@ services:
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
-  # --- FRONTEND ---
   frontend:
-    image: node:18-alpine
-    working_dir: /app
-    volumes:
-      - ./donaton-frontend:/app
+    build:
+      context: ./donaton-frontend
     ports:
       - "3000:3000"
-    command: sh -c "npm install && npm start"
 
 volumes:
   mysql_data:

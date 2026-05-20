@@ -6,7 +6,8 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Usa Java para ejecutar el archivo compilado
-FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17-jre
+# Nota: evita errores por imágenes inexistentes/metadata; si falla en tu entorno, reemplaza por openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]

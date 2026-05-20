@@ -1,0 +1,19 @@
+1. Estrategia de Branching Utilizada
+Para la gestión del código fuente de "Donaton", se adoptó una estrategia de branching basada en Git Flow simplificado. Este enfoque permitió mantener un historial de versiones limpio, organizado y alineado con las metodologías de integración continua, facilitando el trabajo colaborativo sin comprometer la estabilidad del código en producción.
+
+2. Estructura de Ramas
+El repositorio se estructuró de la siguiente manera para separar los entornos de desarrollo:
+
+main (o master): Rama principal que contiene exclusivamente código estable, probado y listo para producción o evaluación. No se realizan commits directos en esta rama.
+
+develop: Rama de integración donde convergen todas las nuevas funcionalidades una vez finalizadas. Es el entorno de pruebas principal.
+
+Ramas feature/: Ramas temporales creadas a partir de develop para desarrollar funcionalidades o componentes específicos de manera aislada (ej. feature/bff-service, feature/frontend-login, feature/donation-tests). Una vez completada la tarea, se fusionan de vuelta a develop.
+
+3. Colaboración y Control de Versiones
+La estructura de ramas favoreció enormemente el control de versiones al permitir el desarrollo paralelo de los componentes (Frontend, BFF, Microservicios). Se utilizó el mecanismo de Pull Requests (PR) para integrar el código de las ramas feature hacia develop. Esto obligó a realizar revisiones de código antes de cada merge, asegurando que la implementación de los arquetipos Maven y los patrones de diseño cumplieran con los estándares del proyecto antes de integrarse al flujo principal.
+
+4. Gestión y Resolución de Conflictos
+Durante el desarrollo concurrente, particularmente al ajustar las configuraciones del API Gateway y los modelos del frontend, se presentaron conflictos de fusión (merge conflicts) en archivos compartidos como el package.json y pom.xml.
+
+Resolución: Estos conflictos se gestionaron localmente ejecutando git fetch y git merge develop dentro de las ramas de feature antes de intentar subir los cambios. Los conflictos se resolvieron manualmente a través de la interfaz del editor de código, comparando los cambios entrantes (incoming changes) con los actuales (current changes), priorizando siempre las dependencias más recientes y conservando las configuraciones de puertos establecidas para los microservicios. Finalmente, se realizó un commit de resolución dejando un registro claro en el historial de Git.
