@@ -1,0 +1,33 @@
+1. Introducción
+El presente documento detalla el análisis arquitectónico y las decisiones de diseño adoptadas para el desarrollo de la plataforma "Donaton". El objetivo principal de estas decisiones es garantizar que el sistema sea eficiente, escalable y mantenible a lo largo del tiempo, cumpliendo con los requerimientos del cliente mediante una arquitectura basada en microservicios y bases de datos relacionales (MySQL).
+
+2. Arquetipos Maven y Arquitectura Backend
+La solución backend fue estructurada utilizando arquetipos Maven para asegurar la estandarización y coherencia en la creación de los distintos módulos del proyecto. La arquitectura se dividió en tres componentes principales:
+
+Backend For Frontend (BFF): Se implementó un servicio BFF (bff-service) para actuar como intermediario entre la interfaz de usuario (frontend) y los microservicios subyacentes. Esto centraliza las peticiones, optimiza la carga de datos reduciendo la cantidad de llamadas desde el cliente, y adapta las respuestas estrictamente a lo que requiere la vista.
+
+Microservicios de Dominio: La lógica de negocio se descentralizó en dos microservicios independientes (donation-service y logistics-service). Esta separación permite que el sistema sea altamente escalable; si el flujo de donaciones aumenta exponencialmente, se pueden asignar más recursos exclusivamente a ese servicio sin afectar la logística. Además, cada microservicio gestiona su propia conexión a la base de datos MySQL, evitando acoplamientos y puntos únicos de fallo.
+
+3. Patrones de Diseño Implementados
+Para resolver problemas recurrentes de diseño y mejorar la calidad del código, se implementaron los siguientes patrones:
+
+Patrón Factory (Creacional):
+
+Problema: La instanciación directa de objetos complejos (como distintos tipos de donaciones) generaba un alto acoplamiento en los controladores y servicios.
+
+Justificación: Se centralizó la lógica de creación en clases Factory. Esto facilita la mantenibilidad del sistema, ya que si en el futuro se integran nuevas categorías de ayuda humanitaria a Donaton, solo se requiere modificar la fábrica sin alterar la lógica core del negocio.
+
+Patrón Adapter (Estructural):
+
+Problema: Las respuestas generadas por las consultas a la base de datos MySQL no siempre coincidían con las interfaces requeridas por el BFF o el frontend.
+
+Justificación: El patrón Adapter permitió traducir y compatibilizar estas estructuras de datos. Esto desacopla el modelo de persistencia de la capa de presentación, haciendo el sistema mucho más flexible ante futuros cambios en el esquema de la base de datos.
+
+Patrón Data Transfer Object - DTO (Estructural/Arquitectónico):
+
+Problema: Exponer las entidades completas del modelo de dominio a través de la API representaba un riesgo de seguridad (sobre-exposición de datos) y un consumo ineficiente de ancho de banda.
+
+Justificación: Se implementaron DTOs para encapsular y transportar únicamente la información estrictamente necesaria entre los microservicios y el cliente. Esto mejora significativamente el rendimiento y la seguridad de las transacciones HTTP.
+
+4. Pruebas Unitarias y Calidad de Código
+Para garantizar la estabilidad de los componentes, se desarrollaron pruebas unitarias exhaustivas (evidenciadas en clases como DonationControllerTest.java). Estas pruebas validan el comportamiento de los controladores y la correcta aplicación de los patrones descritos, asegurando una alta cobertura de código, minimizando la aparición de bugs en producción y facilitando la refactorización segura.
